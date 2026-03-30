@@ -48,7 +48,6 @@ Detection Head: multi-scale [P3, P4, P5]
 | File | Description |
 |---|---|
 | `ultralytics/nn/MaxViT.py` | MaxViT block implementation (multi-axis attention) |
-| `ultralytics/nn/SwinTransformer.py` | Swin Transformer blocks |
 | `ultralytics/cfg/models/11/yolov11C3TR.yaml` | Custom model architecture config |
 | `ultralytics/cfg/datasets/coco20k.yaml` | COCO 2017 20K subset config |
 | `train_custom.py` | Full training script with all hyperparameters |
