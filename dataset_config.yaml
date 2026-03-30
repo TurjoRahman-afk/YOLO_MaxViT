@@ -1,0 +1,47 @@
+# YOLOv11 + MaxViT Custom Dataset Configuration
+# AutoDL Training Setup
+
+# Dataset paths (adjust according to your dataset location on AutoDL)
+path: /root/yolov11-maxvit/datasets/custom_dataset  # dataset root dir
+train: images/train  # train images (relative to 'path')
+val: images/val      # val images (relative to 'path')
+test: images/test    # test images (optional)
+
+# Classes (modify according to your dataset)
+names:
+  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: airplane
+  5: bus
+  6: train
+  7: truck
+
+# Number of classes
+nc: 8
+
+# Training hyperparameters optimized for MaxViT
+# These settings work well with the attention mechanism
+hyperparameters:
+  lr0: 0.001          # initial learning rate (lower for transformers)
+  momentum: 0.9       # SGD momentum/Adam beta1
+  weight_decay: 0.0005 # optimizer weight decay 5e-4
+  warmup_epochs: 3    # warmup epochs
+  warmup_momentum: 0.8 # warmup initial momentum
+  cos_lr: True        # cosine LR scheduler
+  
+# Data augmentation settings
+augmentation:
+  hsv_h: 0.015        # image HSV-Hue augmentation (fraction)
+  hsv_s: 0.7          # image HSV-Saturation augmentation (fraction)
+  hsv_v: 0.4          # image HSV-Value augmentation (fraction)
+  degrees: 0.0        # image rotation (+/- deg)
+  translate: 0.1      # image translation (+/- fraction)
+  scale: 0.5          # image scale (+/- gain)
+  shear: 0.0          # image shear (+/- deg)
+  perspective: 0.0    # image perspective (+/- fraction), range 0-0.001
+  flipud: 0.0         # image flip up-down (probability)
+  fliplr: 0.5         # image flip left-right (probability)
+  mosaic: 1.0         # image mosaic (probability)
+  mixup: 0.0          # image mixup (probability)
