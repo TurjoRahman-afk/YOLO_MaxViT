@@ -230,7 +230,10 @@ for image_name in image_files:
 
 # Final FPS summary
 print(f"Processed {frame_count} images in {total_time:.2f} seconds.")
-print(f"Average FPS: {frame_count / total_time:.2f}")
+if total_time > 0:
+    print(f"Average FPS: {frame_count / total_time:.2f}")
+else:
+    print("No images were processed.")
 
 cv2.destroyAllWindows()
 

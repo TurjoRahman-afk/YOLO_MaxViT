@@ -130,7 +130,7 @@ class WindowAttention(nn.Module):
         # print(attn.dtype, v.dtype)
         try:
             x = (attn @ v).transpose(1, 2).reshape(B_, N, C)
-        except:
+        except RuntimeError:
             # print(attn.dtype, v.dtype)
             x = (attn.half() @ v).transpose(1, 2).reshape(B_, N, C)
         x = self.proj(x)
