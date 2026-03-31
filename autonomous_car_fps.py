@@ -46,5 +46,8 @@ cap.release()
 cv2.destroyAllWindows()
 
 # Calculate and print average FPS
-average_fps = sum(fps_list) / len(fps_list)
-print(f"Average FPS: {average_fps:.2f}")
+if fps_list:
+    average_fps = sum(fps_list) / len(fps_list)
+    print(f"Average FPS: {average_fps:.2f}")
+else:
+    print("Average FPS: N/A (no frames were processed)")

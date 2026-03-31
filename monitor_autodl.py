@@ -93,7 +93,9 @@ class AutoDLMonitor:
                         df = pd.read_csv(results_file)
                         if len(df) > 0:
                             latest = df.iloc[-1]
-                            print(f"📈 Epoch {latest['epoch']}: mAP50={latest.get('metrics/mAP50(B)', 'N/A'):.4f}")
+                            mAP50 = latest.get('metrics/mAP50(B)', 'N/A')
+                            mAP50_str = f"{mAP50:.4f}" if isinstance(mAP50, (int, float)) else str(mAP50)
+                            print(f"📈 Epoch {latest['epoch']}: mAP50={mAP50_str}")
                     except Exception as e:
                         print(f"Error reading training progress: {e}")
     
