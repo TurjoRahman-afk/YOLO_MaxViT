@@ -105,14 +105,33 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 
 ## 📊 Results
 
-> ⏳ Training in progress — results will be added after full training run completes.
+> ⏳ Training in progress (120/300 epochs complete) — table will be updated as training continues.
 
-| Model | Dataset | Epochs | mAP@0.5 | mAP@0.5:0.95 |
+### Current Best Checkpoint
+
+| Model | Dataset | Epochs Run | mAP@0.5 | mAP@0.5:0.95 | Status |
+|---|---|---|---|---|---|
+| YOLOv11n (baseline) | COCO 2017 | 300 | 0.516 | 0.386 | Reference |
+| **YOLO-MaxViT (ours)** | COCO 20K subset | 120 / 300 | **0.372** | **0.243** | 🔄 In Progress |
+
+### Training Progress
+
+| Epoch | mAP@0.5 | mAP@0.5:0.95 | Box Loss | Cls Loss |
 |---|---|---|---|---|
-| YOLOv11n (baseline) | COCO 2017 | 300 | — | — |
-| **YOLO-MaxViT (ours)** | COCO 20K | — | — | — |
+| 1 | 0.001 | 0.000 | 3.363 | 4.999 |
+| 30 | 0.274 | 0.173 | 1.423 | 2.150 |
+| 60 | 0.340 | 0.219 | 1.343 | 1.878 |
+| 90 | 0.358 | 0.232 | 1.307 | 1.767 |
+| **120** | **0.372** | **0.243** | **1.282** | **1.691** |
 
-*Results will be updated once training completes.*
+### Training Details
+- **Dataset**: COCO 2017 — 20,000 train images / 5,000 val images (80 classes)
+- **Hardware**: NVIDIA RTX 5060 8 GB
+- **Batch size**: 16 with AMP (mixed precision)
+- **~Epoch time**: 5–6 minutes
+- **Saved checkpoints**: `epoch0.pt`, `epoch30.pt`, `epoch60.pt`, `epoch90.pt`, `best.pt`, `last.pt`
+
+> 📌 Note: Trained on 20K subset (~17% of full COCO). Expected mAP@0.5 on full COCO 2017 with 300 epochs: ~0.45–0.50
 
 ---
 
@@ -145,8 +164,4 @@ See [LICENSE](LICENSE) for details.
 
 ---
 
-## 👤 Author
 
-**Turjo Rahman**
-- GitHub: [@TurjoRahman-afk](https://github.com/TurjoRahman-afk)
-- Email: us.khan.2002@gmail.com
