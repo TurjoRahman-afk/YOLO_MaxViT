@@ -124,6 +124,14 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 | 90 | 0.358 | 0.232 | 1.307 | 1.767 |
 | **120** | **0.372** | **0.243** | **1.282** | **1.691** |
 
+### Training Curves
+
+![Training Dashboard](results/training_dashboard.png)
+
+![mAP Curve](results/map_curve.png)
+
+![Loss Curve](results/loss_curve.png)
+
 ### Training Details
 - **Dataset**: COCO 2017 — 20,000 train images / 5,000 val images (80 classes)
 - **Hardware**: NVIDIA RTX 5060 8 GB
