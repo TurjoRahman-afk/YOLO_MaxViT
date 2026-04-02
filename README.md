@@ -126,11 +126,18 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 
 ### Training Curves
 
-![Training Dashboard](results/training_dashboard.png)
-
-![mAP Curve](results/map_curve.png)
-
-![Loss Curve](results/loss_curve.png)
+<table>
+  <tr>
+    <td><img src="results/training_dashboard.png" width="100%"/></td>
+    <td><img src="results/map_curve.png" width="100%"/></td>
+    <td><img src="results/loss_curve.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center">Dashboard</td>
+    <td align="center">mAP Curve</td>
+    <td align="center">Loss Curve</td>
+  </tr>
+</table>
 
 ### Training Details
 - **Dataset**: COCO 2017 — 20,000 train images / 5,000 val images (80 classes)
