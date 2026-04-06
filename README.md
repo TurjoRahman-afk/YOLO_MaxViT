@@ -114,6 +114,29 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 | YOLOv11n (baseline) | COCO 2017 | 300 | 0.516 | 0.386 | Reference |
 | **YOLO-MaxViT (ours)** | COCO 20K subset | 240 / 300 | **0.404** | **0.264** | 🔄 In Progress |
 
+---
+
+### 📈 Comparison with Official YOLO11 Family
+
+> ⚠️ **Important**: Official YOLO11 models are pretrained on the **full COCO 2017 train set (118K images)**. Our model is trained on a **20K subset (~17%)**. This comparison is for context only — it is **not a fair apples-to-apples comparison**.
+
+| Model | Train Images | mAP@0.5:0.95 | Params (M) | FLOPs (B) | Notes |
+|---|---|---|---|---|---|
+| YOLO11n | 118K | 0.395 | 2.6 | 6.5 | Official pretrained |
+| YOLO11s | 118K | 0.470 | 9.4 | 21.5 | Official pretrained |
+| YOLO11m | 118K | 0.515 | 20.1 | 68.0 | Official pretrained |
+| YOLO11l | 118K | 0.534 | 25.3 | 86.9 | Official pretrained |
+| YOLO11x | 118K | 0.547 | 56.9 | 194.9 | Official pretrained |
+| **YOLO-MaxViT (ours)** | **20K** | **0.264** | **~4.9** | ~TBD | 🔄 240/300 epochs |
+
+**Key observations:**
+- Our model achieves **mAP50-95 = 0.264** using only **17% of the training data** that official models use
+- Parameter count (~4.9M) sits between YOLO11n (2.6M) and YOLO11s (9.4M), with added transformer overhead
+- The mAP gap vs YOLO11n (0.395) is expected to narrow significantly when trained on full COCO 118K
+- MaxViT + C3TR blocks add global attention context at the cost of increased FLOPs
+
+---
+
 ### Training Progress
 
 | Epoch | mAP@0.5 | mAP@0.5:0.95 | Box Loss | Cls Loss |
