@@ -105,14 +105,14 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 
 ## 📊 Results
 
-> ⏳ Training in progress (240/300 epochs complete) — table will be updated as training continues.
+> ⏳ Training in progress (270/300 epochs complete) — table will be updated as training continues.
 
 ### Current Best Checkpoint
 
 | Model | Dataset | Epochs Run | mAP@0.5 | mAP@0.5:0.95 | Status |
 |---|---|---|---|---|---|
 | YOLOv11n (baseline) | COCO 2017 | 300 | 0.516 | 0.386 | Reference |
-| **YOLO-MaxViT (ours)** | COCO 20K subset | 240 / 300 | **0.404** | **0.264** | 🔄 In Progress |
+| **YOLO-MaxViT (ours)** | COCO 20K subset | 270 / 300 | **0.405** | **0.263** | 🔄 In Progress |
 
 ---
 
@@ -149,7 +149,8 @@ Set `RESUME = True` in `train_custom.py` to continue from `last.pt`.
 | 150 | 0.385 | 0.253 | 1.257 | 1.619 |
 | 180 | 0.394 | 0.259 | 1.228 | 1.538 |
 | 210 | 0.401 | 0.263 | 1.200 | 1.460 |
-| **240** | **0.404** | **0.264** | **1.172** | **1.385** |
+| 240 | 0.404 | 0.264 | 1.172 | 1.385 |
+| **270** | **0.405** | **0.263** | **1.125** | **1.298** |
 
 ### Training Curves
 
