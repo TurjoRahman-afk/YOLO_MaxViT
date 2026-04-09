@@ -55,18 +55,44 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 | Metric | Value |
 |---|---|
-| Epochs completed | 55 / 300 |
-| Current mAP@0.5 | 0.334 |
-| Current mAP@0.5:0.95 | 0.220 |
+| Epochs completed | ~55 / 300 |
+| Best mAP@0.5 so far | 0.334 |
+| Best mAP@0.5:0.95 so far | 0.220 |
 | Training time per epoch | ~4.8–5.2 min |
 
-### Early Results (Epoch 55)
+### v2 Training Progress (every 30 epochs)
 
 | Epoch | mAP@0.5 | mAP@0.5:0.95 | Box Loss | Cls Loss |
 |---|---|---|---|---|
-| 1 | — | — | 3.29 | 5.00 |
-| 20 | — | — | 1.68 | 2.45 |
-| 55 | 0.334 | 0.220 | 1.331 | 1.883 |
+| 1 | 0.002 | 0.001 | 3.371 | 4.983 |
+| 30 | 0.277 | 0.176 | 1.406 | 2.136 |
+| **60** | — | — | — | — |
+| 90 | — | — | — | — |
+| 120 | — | — | — | — |
+| 150 | — | — | — | — |
+| 180 | — | — | — | — |
+| 210 | — | — | — | — |
+| 240 | — | — | — | — |
+| 270 | — | — | — | — |
+| 300 | — | — | — | — |
+
+### v1 vs v2 Side-by-Side Comparison
+
+> v1 is fully trained (300 epochs). v2 is in progress — rows will be filled as training completes each 30-epoch checkpoint.
+
+| Epoch | v1 mAP@0.5 | v2 mAP@0.5 | v1 mAP50-95 | v2 mAP50-95 |
+|---|---|---|---|---|
+| 1 | 0.001 | 0.002 | 0.000 | 0.001 |
+| 30 | 0.274 | 0.277 | 0.173 | 0.176 |
+| 60 | 0.340 | — | 0.219 | — |
+| 90 | 0.358 | — | 0.232 | — |
+| 120 | 0.372 | — | 0.243 | — |
+| 150 | 0.385 | — | 0.253 | — |
+| 180 | 0.394 | — | 0.259 | — |
+| 210 | 0.401 | — | 0.263 | — |
+| 240 | 0.404 | — | 0.264 | — |
+| 270 | 0.405 | — | 0.263 | — |
+| 300 | 0.405 | — | 0.263 | — |
 
 ---
 
