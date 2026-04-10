@@ -76,6 +76,23 @@ The key insight: transformer attention's benefit scales with semantic importance
 | 270 | — | — | — | — |
 | 300 | — | — | — | — |
 
+### v1 vs v2 Training Curves
+
+<table>
+  <tr>
+    <td><img src="results/compare_dashboard.png" width="100%"/></td>
+    <td><img src="results/compare_map.png" width="100%"/></td>
+    <td><img src="results/compare_loss.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Dashboard</b></td>
+    <td align="center"><b>mAP Comparison</b></td>
+    <td align="center"><b>Loss Comparison</b></td>
+  </tr>
+</table>
+
+> Solid lines = v1 (170 GFLOPs, 300 epochs complete) — Dashed lines = v2 (~49 GFLOPs, training in progress)
+
 ### v1 vs v2 Side-by-Side Comparison
 
 > v1 is fully trained (300 epochs). v2 is in progress — rows will be filled as training completes each 30-epoch checkpoint.
