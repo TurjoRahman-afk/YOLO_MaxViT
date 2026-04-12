@@ -2,7 +2,7 @@
 
 **Lightweight variant with reduced compute (~40 GFLOPs vs 170) while maintaining accuracy**
 
-> ⏳ **Training in progress** — 180/300 epochs on COCO 2017 20K subset
+> ⏳ **Training in progress** — 210/300 epochs on COCO 2017 20K subset
 
 ---
 
@@ -55,9 +55,9 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 | Metric | Value |
 |---|---|
-| Epochs completed | 180 / 300 |
-| Best mAP@0.5 so far | 0.399 |
-| Best mAP@0.5:0.95 so far | 0.267 |
+| Epochs completed | 210 / 300 |
+| Best mAP@0.5 so far | 0.407 |
+| Best mAP@0.5:0.95 so far | 0.273 |
 | Training time per epoch | ~4.8–5.2 min |
 
 ### v2 Training Progress (every 30 epochs)
@@ -70,8 +70,8 @@ The key insight: transformer attention's benefit scales with semantic importance
 | 90 | 0.357 | 0.237 | 1.281 | 1.721 |
 | 120 | 0.374 | 0.249 | 1.259 | 1.659 |
 | 150 | 0.389 | 0.260 | 1.216 | 1.530 |
-| **180** | **0.399** | **0.267** | **1.189** | **1.462** |
-| 210 | — | — | — | — |
+| 180 | 0.399 | 0.267 | 1.189 | 1.462 |
+| **210** | **0.407** | **0.273** | **1.155** | **1.349** |
 | 240 | — | — | — | — |
 | 270 | — | — | — | — |
 | 300 | — | — | — | — |
@@ -106,7 +106,7 @@ The key insight: transformer attention's benefit scales with semantic importance
 | 120 | 0.372 | 0.374 | 0.243 | 0.249 |
 | 150 | 0.385 | 0.389 | 0.253 | 0.260 |
 | 180 | 0.394 | 0.399 | 0.259 | 0.267 |
-| 210 | 0.401 | — | 0.263 | — |
+| 210 | 0.401 | 0.407 | 0.263 | 0.273 |
 | 240 | 0.404 | — | 0.264 | — |
 | 270 | 0.405 | — | 0.263 | — |
 | 300 | 0.405 | — | 0.263 | — |
