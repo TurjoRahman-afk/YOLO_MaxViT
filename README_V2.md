@@ -2,7 +2,7 @@
 
 **Lightweight variant with reduced compute (~40 GFLOPs vs 170) while maintaining accuracy**
 
-> ⏳ **Training in progress** — 240/300 epochs on COCO 2017 20K subset
+> ✅ **Training complete** — 300/300 epochs on COCO 2017 20K subset
 
 ---
 
@@ -55,10 +55,13 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 | Metric | Value |
 |---|---|
-| Epochs completed | 240 / 300 |
-| Best mAP@0.5 so far | 0.412 |
-| Best mAP@0.5:0.95 so far | 0.276 |
+| Epochs completed | **300 / 300 ✅** |
+| Best mAP@0.5 | **0.412** (epoch 270) |
+| Best mAP@0.5:0.95 | **0.275** (epoch 270) |
+| Precision (best) | 0.531 |
+| Recall (best) | 0.402 |
 | Training time per epoch | ~4.8–5.2 min |
+| Total training time | ~24 hours |
 
 ### v2 Training Progress (every 30 epochs)
 
@@ -72,9 +75,9 @@ The key insight: transformer attention's benefit scales with semantic importance
 | 150 | 0.389 | 0.260 | 1.216 | 1.530 |
 | 180 | 0.399 | 0.267 | 1.189 | 1.462 |
 | 210 | 0.407 | 0.273 | 1.155 | 1.349 |
-| **240** | **0.412** | **0.276** | **1.119** | **1.278** |
-| 270 | — | — | — | — |
-| 300 | — | — | — | — |
+| 240 | 0.412 | 0.276 | 1.119 | 1.278 |
+| **270** | **0.412** | **0.275** | **1.090** | **1.219** |
+| 300 | 0.412 | 0.273 | 1.107 | 1.099 |
 
 ### v1 vs v2 Training Curves
 
@@ -91,11 +94,11 @@ The key insight: transformer attention's benefit scales with semantic importance
   </tr>
 </table>
 
-> Solid lines = v1 (170 GFLOPs, 300 epochs complete) — Dashed lines = v2 (~49 GFLOPs, training in progress)
+> Solid lines = v1 (170 GFLOPs) — Dashed lines = v2 (~49 GFLOPs) — Both fully trained, 300/300 epochs
 
 ### v1 vs v2 Side-by-Side Comparison
 
-> v1 is fully trained (300 epochs). v2 is in progress — rows will be filled as training completes each 30-epoch checkpoint.
+> Both v1 and v2 are fully trained (300/300 epochs). v2 outperformed v1 in mAP@0.5 at every checkpoint from epoch 90 onward.
 
 | Epoch | v1 mAP@0.5 | v2 mAP@0.5 | v1 mAP50-95 | v2 mAP50-95 |
 |---|---|---|---|---|
@@ -108,8 +111,44 @@ The key insight: transformer attention's benefit scales with semantic importance
 | 180 | 0.394 | 0.399 | 0.259 | 0.267 |
 | 210 | 0.401 | 0.407 | 0.263 | 0.273 |
 | 240 | 0.404 | 0.412 | 0.264 | 0.276 |
-| 270 | 0.405 | — | 0.263 | — |
-| 300 | 0.405 | — | 0.263 | — |
+| 270 | 0.405 | **0.412** | 0.263 | **0.275** |
+| 300 | 0.405 | 0.412 | 0.263 | 0.273 |
+
+---
+
+## Final Evaluation Results
+
+> Training complete — 300/300 epochs, COCO 2017 20K subset.
+
+### Best Checkpoint Metrics (Epoch 270)
+
+| Metric | v2 (Ours) | v1 (Original) | YOLO11n (Baseline) |
+|---|---|---|---|
+| **mAP@0.5** | **0.412** | 0.405 | 0.395 |
+| **mAP@0.5:0.95** | **0.275** | 0.263 | — |
+| Precision | 0.531 | — | — |
+| Recall | 0.402 | — | — |
+| GFLOPs | **~49** | 170.5 | 6.5 |
+| Parameters | ~4.7M | 4.89M | ~2.6M |
+
+### Evaluation Curves
+
+<table>
+  <tr>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/PR_curve.png" width="100%"/></td>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/F1_curve.png" width="100%"/></td>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/confusion_matrix_normalized.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>PR Curve</b></td>
+    <td align="center"><b>F1 Curve</b></td>
+    <td align="center"><b>Confusion Matrix (Normalized)</b></td>
+  </tr>
+</table>
+
+### Key Outcome
+
+v2 **outperformed v1** in final mAP@0.5 (**0.412 vs 0.405**) using **~3.5× fewer GFLOPs** (49 vs 170.5). The optimized MaxViT window sizes and removal of the mid-scale transformer (P4) not only reduced compute but slightly improved final accuracy — likely through better generalization from the reduced attention receptive field.
 
 ---
 
@@ -152,17 +191,15 @@ results[0].show()
 
 ---
 
-## Expected Results
+## Actual vs Projected Results
 
-Based on early convergence trends, v2 is projected to reach:
+| Milestone | Projected | **Actual** |
+|---|---|---|
+| Epoch 60 | mAP50 ~0.36, mAP50-95 ~0.23 | **0.337 / 0.222** |
+| Epoch 120 | mAP50 ~0.39, mAP50-95 ~0.25 | **0.374 / 0.249** |
+| Epoch 300 | mAP50 ~0.40–0.41, mAP50-95 ~0.26–0.27 | **0.412 / 0.273** |
 
-| Milestone | Estimated Performance |
-|---|---|
-| **Epoch 60** | mAP50 ~0.36, mAP50-95 ~0.23 |
-| **Epoch 120** | mAP50 ~0.39, mAP50-95 ~0.25 |
-| **Epoch 300** | mAP50 ~0.40–0.41, mAP50-95 ~0.26–0.27 |
-
-This represents a **~2–3% mAP drop from v1** (due to removed transformer at P4) but with **4× faster inference**.
+v2 **exceeded projections** at epoch 300 and **surpassed v1** (0.405 mAP@0.5) — no accuracy drop, only compute savings.
 
 ---
 
@@ -171,7 +208,7 @@ This represents a **~2–3% mAP drop from v1** (due to removed transformer at P4
 | Model | GFLOPs | mAP50 (est. @ 300ep) | Speed | Best For |
 |---|---|---|---|---|
 | **v1** | 170.5 | 0.405 | Slower | Max accuracy research |
-| **v2** | ~45 | 0.40–0.41 | **~4× faster** | Production, edge deployment |
+| **v2** | ~49 | **0.412** ✅ | **~3.5× faster** | Production, edge deployment |
 | YOLO11n | 6.5 | 0.395 | Fastest | Baseline |
 
 v2 sits between pure CNN efficiency (v1) and pure speed (YOLO11n), prioritizing practical deployment without sacrificing too much accuracy.
