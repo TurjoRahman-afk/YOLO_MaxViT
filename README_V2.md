@@ -118,37 +118,102 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 ## Final Evaluation Results
 
-> Training complete — 300/300 epochs, COCO 2017 20K subset.
+> ✅ Training complete — **300/300 epochs** on COCO 2017 20K subset.
+> Best weights saved at **epoch 263** (`runs/research/yolov11_C3TR_MaxViT_v2_coco20k/weights/best.pt`).
 
-### Best Checkpoint Metrics (Epoch 270)
+---
 
-| Metric | v2 (Ours) | v1 (Original) | YOLO11n (Baseline) |
+### 📊 Best Checkpoint Metrics (Epoch 263)
+
+| Metric | **v2 (Ours)** | v1 (Original) | YOLO11n (Baseline) |
 |---|---|---|---|
-| **mAP@0.5** | **0.412** | 0.405 | 0.395 |
-| **mAP@0.5:0.95** | **0.275** | 0.263 | — |
-| Precision | 0.531 | — | — |
-| Recall | 0.402 | — | — |
+| **mAP@0.5** | **0.4129** | 0.405 | 0.395 |
+| **mAP@0.5:0.95** | **0.2756** | 0.263 | — |
+| **Precision** | **0.5362** | — | — |
+| **Recall** | **0.4019** | — | — |
+| **F1 Score** | **0.459** | — | — |
 | GFLOPs | **~49** | 170.5 | 6.5 |
 | Parameters | ~4.7M | 4.89M | ~2.6M |
+| Compute Reduction | **3.5× cheaper** | baseline | 26× cheaper |
 
-### Evaluation Curves
+> F1 = 2 × Precision × Recall / (Precision + Recall) = **0.459**
+
+---
+
+### 📉 Loss Summary (Best Epoch 263)
+
+| Loss | Training | Validation |
+|---|---|---|
+| **Box Loss** | 1.0958 | 1.2847 |
+| **Cls Loss** | 1.2304 | 1.4896 |
+| **DFL Loss** | 1.2127 | 1.3358 |
+
+---
+
+### 📈 Evaluation Curves
 
 <table>
   <tr>
     <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/PR_curve.png" width="100%"/></td>
     <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/F1_curve.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Precision–Recall Curve</b></td>
+    <td align="center"><b>F1–Confidence Curve</b></td>
+  </tr>
+  <tr>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/P_curve.png" width="100%"/></td>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/R_curve.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Precision–Confidence Curve</b></td>
+    <td align="center"><b>Recall–Confidence Curve</b></td>
+  </tr>
+</table>
+
+---
+
+### 🗂️ Confusion Matrix
+
+<table>
+  <tr>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/confusion_matrix.png" width="100%"/></td>
     <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/confusion_matrix_normalized.png" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center"><b>PR Curve</b></td>
-    <td align="center"><b>F1 Curve</b></td>
+    <td align="center"><b>Confusion Matrix (Raw)</b></td>
     <td align="center"><b>Confusion Matrix (Normalized)</b></td>
   </tr>
 </table>
 
-### Key Outcome
+---
 
-v2 **outperformed v1** in final mAP@0.5 (**0.412 vs 0.405**) using **~3.5× fewer GFLOPs** (49 vs 170.5). The optimized MaxViT window sizes and removal of the mid-scale transformer (P4) not only reduced compute but slightly improved final accuracy — likely through better generalization from the reduced attention receptive field.
+### 🔍 Sample Predictions
+
+<table>
+  <tr>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/val_batch0_labels.jpg" width="100%"/></td>
+    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/val_batch0_pred.jpg" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Ground Truth</b></td>
+    <td align="center"><b>Predictions</b></td>
+  </tr>
+</table>
+
+---
+
+### 💡 Key Outcome
+
+v2 **outperformed v1** in mAP@0.5 (**0.4129 vs 0.405**) with **3.5× fewer GFLOPs** (49 vs 170.5). Shrinking MaxViT attention windows and replacing the mid-scale P4 transformer with a CNN block reduced compute without hurting accuracy — the model actually generalized slightly better, likely due to reduced over-parameterization at mid-level features.
+
+| Finding | Detail |
+|---|---|
+| Accuracy vs v1 | **+0.008 mAP@0.5** (+1.9%) |
+| Compute vs v1 | **−121.5 GFLOPs** (3.5× reduction) |
+| Convergence | Best at epoch 263 / 300 |
+| Precision | 0.5362 — clean detections |
+| Recall | 0.4019 — room to improve with larger data |
 
 ---
 
