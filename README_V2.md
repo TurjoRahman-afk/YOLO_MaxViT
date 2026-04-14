@@ -1,6 +1,6 @@
 # YOLO-MaxViT v2: Optimized Architecture
 
-**Lightweight variant with reduced compute (~40 GFLOPs vs 170) while maintaining accuracy**
+**Lightweight variant with 49.3 GFLOPs vs 170.5 — 3.46× cheaper, yet higher mAP**
 
 > ✅ **Training complete** — 300/300 epochs on COCO 2017 20K subset
 
@@ -25,10 +25,10 @@ YOLO-MaxViT v2 is an optimized iteration of the original architecture, designed 
 
 ### Compute Cost
 
-| Model | Parameters | GFLOPs | Reduction |
-|---|---|---|---|
-| v1 (original) | 4.89M | 170.5 | — |
-| v2 (optimized) | ~4.7M | **~40–50** | **3.4–4.3× cheaper** |
+| Model | Parameters | Layers | GFLOPs | Reduction |
+|---|---|---|---|---|
+| v1 (original) | 4,890,000 | 303 | 170.5 | — |
+| v2 (optimized) | **4,893,952** | **297** | **49.3** | **3.46× cheaper** |
 
 ### Design Rationale
 
@@ -132,9 +132,10 @@ The key insight: transformer attention's benefit scales with semantic importance
 | **Precision** | **0.5362** | — | — |
 | **Recall** | **0.4019** | — | — |
 | **F1 Score** | **0.459** | — | — |
-| GFLOPs | **~49** | 170.5 | 6.5 |
-| Parameters | ~4.7M | 4.89M | ~2.6M |
-| Compute Reduction | **3.5× cheaper** | baseline | 26× cheaper |
+| GFLOPs | **49.3** | 170.5 | 6.5 |
+| Parameters | **4,893,952** | 4,890,000 | ~2.6M |
+| Layers | **297** | 303 | — |
+| Compute Reduction | **3.46× cheaper** | baseline | 26× cheaper |
 
 > F1 = 2 × Precision × Recall / (Precision + Recall) = **0.459**
 
@@ -210,7 +211,7 @@ v2 **outperformed v1** in mAP@0.5 (**0.4129 vs 0.405**) with **3.5× fewer GFLOP
 | Finding | Detail |
 |---|---|
 | Accuracy vs v1 | **+0.008 mAP@0.5** (+1.9%) |
-| Compute vs v1 | **−121.5 GFLOPs** (3.5× reduction) |
+| Compute vs v1 | **−121.2 GFLOPs** (3.46× reduction) |
 | Convergence | Best at epoch 263 / 300 |
 | Precision | 0.5362 — clean detections |
 | Recall | 0.4019 — room to improve with larger data |
@@ -273,7 +274,7 @@ v2 **exceeded projections** at epoch 300 and **surpassed v1** (0.405 mAP@0.5) �
 | Model | GFLOPs | mAP50 (est. @ 300ep) | Speed | Best For |
 |---|---|---|---|---|
 | **v1** | 170.5 | 0.405 | Slower | Max accuracy research |
-| **v2** | ~49 | **0.412** ✅ | **~3.5× faster** | Production, edge deployment |
+| **v2** | 49.3 | **0.412** ✅ | **3.46× faster** | Production, edge deployment |
 | YOLO11n | 6.5 | 0.395 | Fastest | Baseline |
 
 v2 sits between pure CNN efficiency (v1) and pure speed (YOLO11n), prioritizing practical deployment without sacrificing too much accuracy.

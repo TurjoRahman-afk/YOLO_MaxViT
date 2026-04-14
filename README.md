@@ -8,7 +8,7 @@
 [![Training: Complete](https://img.shields.io/badge/Training-Complete%20%E2%9C%94-brightgreen)]()
 [![v2: Complete](https://img.shields.io/badge/v2-Complete%20%E2%9C%94-brightgreen)]()
 
-> ✅ **Both v1 and v2 training complete** — 300/300 epochs each on COCO 2017 20K subset. **v2 outperforms v1** (+1.9% mAP@0.5) at **3.5× lower compute** (49 vs 170.5 GFLOPs).
+> ✅ **Both v1 and v2 training complete** — 300/300 epochs each on COCO 2017 20K subset. **v2 outperforms v1** (+1.9% mAP@0.5) at **3.46× lower compute** (49.3 vs 170.5 GFLOPs).
 
 ---
 
@@ -115,8 +115,10 @@ Detection Head: [P3, P4, P5]
 
 | Property | v1 | v2 | Change |
 |---|---|---|---|
-| Parameters | 4.89M | ~4.7M | −0.2M |
-| GFLOPs | 170.5 | **~49** | **−71.3% (−3.5×)** |
+| Parameters | 4,890,000 | **4,893,952** | +3,952 |
+| Gradients | — | **4,893,936** | — |
+| Layers | 303 | **297** | −6 |
+| GFLOPs | 170.5 | **49.3** | **−71.1% (−3.46×)** |
 | Input size | 640×640 | 640×640 | — |
 | Classes (COCO) | 80 | 80 | — |
 
@@ -287,9 +289,9 @@ Checkpoints are saved to `runs/research/yolov11_C3TR_MaxViT_coco20k/weights/`:
 | **Precision** | **0.5362** | — | — |
 | **Recall** | **0.4019** | — | — |
 | **F1 Score** | **0.459** | — | — |
-| GFLOPs | **~49** | 170.5 | 6.5 |
-| Parameters | ~4.7M | 4.89M | ~2.6M |
-| Compute Reduction | **3.5× cheaper** | baseline | 26× cheaper |
+| GFLOPs | **49.3** | 170.5 | 6.5 |
+| Parameters | 4,893,952 | 4,890,000 | ~2.6M |
+| Layers | 297 | 303 | — |
 
 > F1 = 2 × Precision × Recall / (Precision + Recall) = **0.459**
 
@@ -394,7 +396,7 @@ Checkpoints are saved to `runs/research/yolov11_C3TR_MaxViT_coco20k/weights/`:
 | Finding | Detail |
 |---|---|
 | v2 accuracy vs v1 | **+0.008 mAP@0.5** (+1.9%) |
-| v2 compute vs v1 | **−121.5 GFLOPs** (3.5× reduction) |
+| v2 compute vs v1 | **−121.2 GFLOPs** (3.46× reduction) |
 | Best v2 epoch | Epoch 263 / 300 |
 | Precision (v2) | 0.5362 — clean detections |
 | Recall (v2) | 0.4019 — room to improve with more data |
@@ -416,7 +418,7 @@ Shrinking MaxViT attention windows and replacing the mid-scale P4 transformer wi
 | YOLO11l | 118K | 0.534 | 25.3 | 86.9 |
 | YOLO11x | 118K | 0.547 | 56.9 | 194.9 |
 | **YOLO-MaxViT v1 (ours)** | **20K** | **0.263** | **4.9** | **170.5** |
-| **YOLO-MaxViT v2 (ours)** | **20K** | **0.276** | **~4.7** | **~49** |
+| **YOLO-MaxViT v2 (ours)** | **20K** | **0.276** | **4.89M** | **49.3** |
 
 **Key observations:**
 
