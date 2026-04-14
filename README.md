@@ -128,12 +128,14 @@ Detection Head: [P3, P4, P5]
 |---|---|
 | `ultralytics/nn/MaxViT.py` | `MaxViTCNNBlock` implementation — multi-axis local window + grid attention |
 | `ultralytics/cfg/models/11/yolov11C3TR.yaml` | v1 model architecture YAML (170.5 GFLOPs) |
-| `ultralytics/cfg/models/11/yolov11C3TR_v2.yaml` | v2 optimized architecture YAML (~49 GFLOPs) |
+| `ultralytics/cfg/models/11/yolov11C3TR_v2.yaml` | v2 optimized architecture YAML (49.3 GFLOPs) |
 | `ultralytics/cfg/datasets/coco20k.yaml` | COCO 2017 20K-image subset dataset config |
 | `train_custom.py` | Training entry point with all hyperparameters |
 | `plot_results.py` | Generates v1 training curve plots from `results.csv` |
 | `plot_compare.py` | Generates v1 vs v2 side-by-side comparison plots |
 | `results/` | Training plots and comparison charts committed to repo |
+
+> **📌 Note on naming**: The architecture YAML files are named `yolov11C3TR` after the **C3TR transformer blocks** used in the detection neck. However, the primary novel contribution of this project is the **MaxViT backbone integration** (`MaxViTCNNBlock`). The project is therefore branded as **YOLO-MaxViT** — C3TR is a supporting component, not the headline feature.
 
 ---
 
