@@ -6,9 +6,8 @@
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![Framework: Ultralytics](https://img.shields.io/badge/Framework-Ultralytics%20YOLOv11-darkgreen)](https://github.com/ultralytics/ultralytics)
 [![Training: Complete](https://img.shields.io/badge/Training-Complete%20%E2%9C%94-brightgreen)]()
-[![v2: Complete](https://img.shields.io/badge/v2-Complete%20%E2%9C%94-brightgreen)]()
 
-> ✅ **Both v1 and v2 training complete** — 300/300 epochs each on COCO 2017 20K subset. **v2 outperforms v1** (+1.9% mAP@0.5) at **3.46× lower compute** (49.3 vs 170.5 GFLOPs).
+> ✅ **Training complete** — 300/300 epochs on COCO 2017 20K subset. Latest model: **YOLO-MaxViT v2** — mAP@0.5 = **0.413**, GFLOPs = **49.3** (3.46× more efficient than v1).
 
 ---
 
@@ -16,20 +15,19 @@
 
 YOLO-MaxViT is a research project that integrates **Multi-Axis Vision Transformer (MaxViT)** attention into the YOLOv11 detection backbone, combined with **C3TR transformer blocks** in the detection neck. The goal is to evaluate whether hybrid CNN–Transformer architectures can improve detection accuracy over vanilla YOLOv11n while remaining in a comparable parameter budget.
 
-This repository contains the full modified [Ultralytics YOLOv11](https://github.com/ultralytics/ultralytics) codebase, custom architecture definition, training scripts, and complete training results on a 20K-image COCO 2017 subset.
+This repository contains the full modified [Ultralytics YOLOv11](https://github.com/ultralytics/ultralytics) codebase, two custom architecture variants (v1 and v2), training scripts, and complete results on a 20K-image COCO 2017 subset.
 
-> ✅ **Training is complete.** All 300 epochs have finished. No further training updates will be made to this run.
+> The latest and recommended model is **v2** (`yolov11C3TR_v2`) — it achieves **higher mAP at 3.46× lower compute** than v1.
 
 ---
 
 ## Table of Contents
 
-- [Architecture — v1](#architecture)
-- [Architecture — v2 (Optimized)](#architecture--v2-optimized)
+- [Architecture — v2 (Latest)](#architecture--v2-optimized)
+- [Architecture — v1 (Reference)](#architecture)
 - [Key Files](#key-files)
 - [Getting Started](#getting-started)
-- [Results — v1](#results)
-- [Results — v2 (Final Evaluation)](#results--v2-final-evaluation)
+- [Results](#results--v2-final-evaluation)
 - [v1 vs v2 Comparison](#v1-vs-v2-comparison)
 - [Comparison with YOLO11 Family](#comparison-with-yolo11-family)
 - [Training Environment](#training-environment)
@@ -38,7 +36,7 @@ This repository contains the full modified [Ultralytics YOLOv11](https://github.
 
 ---
 
-## Architecture
+## Architecture — v1 (Reference)
 
 ### Model: `yolov11C3TR`
 
@@ -78,11 +76,11 @@ Detection Head: [P3, P4, P5]
 
 ---
 
-## Architecture — v2 (Optimized)
+## Architecture — v2 (Latest)
 
 ### Model: `yolov11C3TR_v2`
 
-v2 is a compute-optimized variant that shrinks MaxViT attention windows and removes the redundant mid-scale transformer in the neck, achieving **3.5× fewer GFLOPs** with no accuracy loss.
+v2 is the **recommended model** — compute-optimized with smaller MaxViT attention windows and a CNN block replacing the redundant mid-scale neck transformer, achieving **3.46× fewer GFLOPs** and **higher mAP** than v1.
 
 ```
 Backbone
@@ -197,7 +195,8 @@ Set `RESUME = True` in `train_custom.py` — it will continue from `weights/last
 ```python
 from ultralytics import YOLO
 
-model = YOLO("runs/research/yolov11_C3TR_MaxViT_coco20k/weights/best.pt")
+# Recommended: use v2 (best accuracy + efficiency)
+model = YOLO("runs/research/yolov11_C3TR_MaxViT_v2_coco20k/weights/best.pt")
 results = model("path/to/image.jpg")
 results[0].show()
 ```
@@ -206,62 +205,7 @@ results[0].show()
 
 ## Results
 
-> ✅ **v1 Training complete** — 300/300 epochs on COCO 2017 20K subset.
-
-### Final Checkpoint
-
-| Model | Dataset | Epochs | mAP@0.5 | mAP@0.5:0.95 |
-|---|---|---|---|---|
-| **YOLO-MaxViT (ours)** | COCO 20K (20,000 imgs) | 300 | **0.405** | **0.263** |
-
-### Training Progress
-
-| Epoch | mAP@0.5 | mAP@0.5:0.95 | Box Loss | Cls Loss |
-|---|---|---|---|---|
-| 1 | 0.001 | 0.000 | 3.363 | 4.999 |
-| 30 | 0.274 | 0.173 | 1.423 | 2.150 |
-| 60 | 0.340 | 0.219 | 1.343 | 1.878 |
-| 90 | 0.358 | 0.232 | 1.307 | 1.767 |
-| 120 | 0.372 | 0.243 | 1.282 | 1.691 |
-| 150 | 0.385 | 0.253 | 1.257 | 1.619 |
-| 180 | 0.394 | 0.259 | 1.228 | 1.538 |
-| 210 | 0.401 | 0.263 | 1.200 | 1.460 |
-| 240 | 0.404 | 0.264 | 1.172 | 1.385 |
-| 270 | 0.405 | 0.263 | 1.125 | 1.298 |
-| **300** | **0.405** | **0.263** | — | — |
-
-The model converged cleanly — per-30-epoch mAP gains dropped below 0.001 after epoch 240, indicating full convergence on this dataset size.
-
-### Training Curves
-
-<table>
-  <tr>
-    <td><img src="results/training_dashboard.png" width="100%"/></td>
-    <td><img src="results/map_curve.png" width="100%"/></td>
-    <td><img src="results/loss_curve.png" width="100%"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Dashboard</b></td>
-    <td align="center"><b>mAP Curve</b></td>
-    <td align="center"><b>Loss Curve</b></td>
-  </tr>
-</table>
-
-### Saved Checkpoints
-
-Checkpoints are saved to `runs/research/yolov11_C3TR_MaxViT_coco20k/weights/`:
-
-| File | Description |
-|---|---|
-| `best.pt` | Highest mAP@0.5:0.95 checkpoint across all epochs |
-| `last.pt` | Final epoch (300) checkpoint |
-| `epoch30.pt`, `epoch60.pt`, ... | Periodic saves every 30 epochs |
-
----
-
-## Results — v2 (Final Evaluation)
-
-> ✅ **v2 Training complete** — 300/300 epochs on COCO 2017 20K subset.
+> ✅ **Training complete** — 300/300 epochs on COCO 2017 20K subset.
 > Best weights saved at **epoch 263** (`runs/research/yolov11_C3TR_MaxViT_v2_coco20k/weights/best.pt`).
 
 ### v2 Training Progress
@@ -422,10 +366,10 @@ Shrinking MaxViT attention windows and replacing the mid-scale P4 transformer wi
 
 **Key observations:**
 
-- With only 17% of the training data, YOLO-MaxViT reaches mAP@0.5:0.95 = 0.263 — within ~0.13 of YOLO11n trained on 6× more images
-- By **parameter count** (4.9M), it sits between YOLO11n (2.6M) and YOLO11s (9.4M) — a nano-to-small scale model
-- By **compute cost** (170.5 GFLOPs), it is comparable to YOLO11l/x — a known transformer trade-off
-- Training on the full COCO 118K dataset is expected to close the mAP gap significantly, potentially reaching **mAP@0.5:0.95 ≈ 0.38–0.42**
+- With only 17% of the training data, YOLO-MaxViT v2 reaches mAP@0.5:0.95 = **0.276** — within ~0.12 of YOLO11n trained on 6× more images
+- By **parameter count** (4.89M), it sits between YOLO11n (2.6M) and YOLO11s (9.4M) — a nano-to-small scale model
+- By **compute cost** (49.3 GFLOPs), v2 is now comparable to **YOLO11s** — a major improvement over v1's 170.5 GFLOPs
+- Training on the full COCO 118K dataset is expected to significantly close the mAP gap, potentially reaching **mAP@0.5:0.95 ≈ 0.40–0.44**
 
 ---
 
