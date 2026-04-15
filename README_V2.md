@@ -155,20 +155,10 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 <table>
   <tr>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/PR_curve.png" width="100%"/></td>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/F1_curve.png" width="100%"/></td>
+    <td><img src="results/eval_curves.png" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Precision–Recall Curve</b></td>
-    <td align="center"><b>F1–Confidence Curve</b></td>
-  </tr>
-  <tr>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/P_curve.png" width="100%"/></td>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/R_curve.png" width="100%"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Precision–Confidence Curve</b></td>
-    <td align="center"><b>Recall–Confidence Curve</b></td>
+    <td align="center"><b>PR Curve • F1 Curve • Precision Curve • Recall Curve</b></td>
   </tr>
 </table>
 
@@ -178,12 +168,10 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 <table>
   <tr>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/confusion_matrix.png" width="100%"/></td>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/confusion_matrix_normalized.png" width="100%"/></td>
+    <td><img src="results/eval_confusion.png" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Confusion Matrix (Raw)</b></td>
-    <td align="center"><b>Confusion Matrix (Normalized)</b></td>
+    <td align="center"><b>Confusion Matrix (Raw) • Confusion Matrix (Normalized)</b></td>
   </tr>
 </table>
 
@@ -193,12 +181,10 @@ The key insight: transformer attention's benefit scales with semantic importance
 
 <table>
   <tr>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/val_batch0_labels.jpg" width="100%"/></td>
-    <td><img src="runs/research/yolov11_C3TR_MaxViT_v2_coco20k/val_batch0_pred.jpg" width="100%"/></td>
+    <td><img src="results/eval_predictions.png" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Ground Truth</b></td>
-    <td align="center"><b>Predictions</b></td>
+    <td align="center"><b>Ground Truth (left) vs Predictions (right) — 3 validation batches</b></td>
   </tr>
 </table>
 
