@@ -226,7 +226,7 @@ results[0].show()
 | **270** | **0.412** | **0.275** | **1.090** | **1.219** |
 | 300 | 0.412 | 0.273 | 1.107 | 1.099 |
 
-### 📊 Best Checkpoint Metrics (Epoch 263)
+###  Best Checkpoint Metrics (Epoch 263)
 
 | Metric | **v2 (Ours)** | v1 (Original) | YOLO11n (Baseline) |
 |---|---|---|---|
@@ -241,7 +241,7 @@ results[0].show()
 
 > F1 = 2 × Precision × Recall / (Precision + Recall) = **0.459**
 
-### 📉 Loss Summary (Best Epoch 263)
+###  Loss Summary (Best Epoch 263)
 
 | Loss | Training | Validation |
 |---|---|---|
@@ -249,7 +249,7 @@ results[0].show()
 | **Cls Loss** | 1.2304 | 1.4896 |
 | **DFL Loss** | 1.2127 | 1.3358 |
 
-### 📈 Evaluation Curves
+###  Evaluation Curves
 
 <table>
   <tr>
@@ -260,7 +260,7 @@ results[0].show()
   </tr>
 </table>
 
-### 🗂️ Confusion Matrix
+###  Confusion Matrix
 
 <table>
   <tr>
@@ -271,7 +271,7 @@ results[0].show()
   </tr>
 </table>
 
-### 🔍 Sample Predictions
+###  Sample Predictions
 
 <table>
   <tr>
@@ -323,7 +323,7 @@ results[0].show()
 
 > Solid lines = v1 (170.5 GFLOPs) — Dashed lines = v2 (~49 GFLOPs)
 
-### 💡 Key Findings
+###  Key Findings
 
 | Finding | Detail |
 |---|---|
